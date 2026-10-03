@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTrack</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>StudyTrack</h1>
+        <p>Organizá tus tareas y entregas por materia.</p>
+    </header>
+
+    <main>
+
+        <!-- LOGIN -->
+        <section id="login-section" class="card">
+            <h2>Iniciar sesión</h2>
+
+            <form id="login-form">
+                <input
+                    type="email"
+                    id="login-email"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="login-password"
+                    placeholder="Contraseña"
+                    required
+                >
+
+                <button type="submit">Ingresar</button>
+            </form>
+
+            <p id="login-message"></p>
+
+            <button id="show-register" class="secondary">
+                Crear una cuenta
+            </button>
+        </section>
+
+        <!-- REGISTRO -->
+        <section id="register-section" class="card hidden">
+            <h2>Crear cuenta</h2>
+
+            <form id="register-form">
+                <input
+                    type="text"
+                    id="register-name"
+                    placeholder="Nombre"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="register-email"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="register-password"
+                    placeholder="Contraseña"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit">Registrarme</button>
+            </form>
+
+            <p id="register-message"></p>
+
+            <button id="show-login" class="secondary">
+                Volver al login
+            </button>
+        </section>
+
+        <!-- APP -->
+        <section id="app-section" class="hidden">
+
+            <div class="top-bar">
+                <div>
+                    <h2>Mis tareas</h2>
+                    <p id="welcome"></p>
+                </div>
+
+                <button id="logout" class="danger">
+                    Cerrar sesión
+                </button>
+            </div>
+
+            <section class="card">
+                <h3>Nueva tarea</h3>
+
+                <form id="task-form">
+
+                    <input
+                        type="text"
+                        id="task-title"
+                        placeholder="Título"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="task-subject"
+                        placeholder="Materia"
+                        required
+                    >
+
+                    <input
+                        type="date"
+                        id="task-date"
+                        required
+                    >
+
+                    <select id="task-priority">
+                        <option value="baja">Baja</option>
+                        <option value="media" selected>Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+
+                    <select id="task-status">
+                        <option value="pendiente" selected>Pendiente</option>
+                        <option value="en_proceso">En proceso</option>
+                        <option value="completada">Completada</option>
+                    </select>
+
+                    <button type="submit">
+                        Agregar tarea
+                    </button>
+
+                </form>
+
+                <p id="task-message"></p>
+            </section>
+
+            <section class="card">
+                <h3>Mis tareas</h3>
+
+                <p id="loading" class="hidden">
+                    Cargando tareas...
+                </p>
+
+                <p id="empty" class="hidden">
+                    No tenés tareas todavía.
+                </p>
+
+                <div id="tasks-container"></div>
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

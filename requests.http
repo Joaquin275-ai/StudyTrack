@@ -1,0 +1,147 @@
+### =========================================
+### STUDYTRACK - REQUESTS
+### =========================================
+
+
+### 1. REGISTRAR USUARIO
+POST http://localhost:3000/auth/registro
+Content-Type: application/json
+
+{
+    "nombre": "Joaquin",
+    "email": "joaquin@studytrack.com",
+    "password": "123456"
+}
+
+
+### 2. LOGIN
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "joaquin@studytrack.com",
+    "password": "123456"
+}
+
+
+### 3. RUTA PROTEGIDA SIN TOKEN ❌
+GET http://localhost:3000/privado
+
+
+### 4. RUTA PROTEGIDA CON TOKEN
+# Copiá el token obtenido en el login y reemplazá PEGAR_TOKEN_AQUI
+GET http://localhost:3000/privado
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+
+### 5. LISTAR MIS TAREAS
+GET http://localhost:3000/tareas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+
+### 6. CREAR TAREA
+POST http://localhost:3000/tareas
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+{
+    "titulo": "Estudiar funciones",
+    "materia": "Matemática",
+    "fecha_entrega": "2026-10-10",
+    "prioridad": "alta",
+    "estado": "pendiente"
+}
+
+
+### 7. OBTENER UNA TAREA
+# Reemplazá 1 por el ID de una tarea existente
+GET http://localhost:3000/tareas/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+
+### 8. ACTUALIZAR UNA TAREA
+PUT http://localhost:3000/tareas/5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+{
+    "titulo": "Estudiar funciones y ecuaciones",
+    "materia": "Matemática",
+    "fecha_entrega": "2026-10-12",
+    "prioridad": "media",
+    "estado": "en_proceso"
+}
+
+
+### 9. COMPLETAR UNA TAREA
+PUT http://localhost:3000/tareas/5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+{
+    "titulo": "Estudiar funciones y ecuaciones",
+    "materia": "Matemática",
+    "fecha_entrega": "2026-10-12",
+    "prioridad": "media",
+    "estado": "completada"
+}
+
+
+### 10. ELIMINAR UNA TAREA
+DELETE http://localhost:3000/tareas/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+
+### =========================================
+### CASOS DE ERROR / SEGURIDAD
+### =========================================
+
+
+### 11. SQL INJECTION ❌
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "' OR '1'='1",
+    "password": "' OR '1'='1"
+}
+
+
+### 12. INPUT INVALIDO ❌
+POST http://localhost:3000/tareas
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+{
+    "titulo": "",
+    "materia": "",
+    "fecha_entrega": ""
+}
+
+
+### 13. ACCESO SIN TOKEN ❌
+GET http://localhost:3000/tareas
+
+
+### 14. ID DE TAREA INEXISTENTE ❌
+GET http://localhost:3000/tareas/999999
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzkxMDUwMzYwLCJleHAiOjE3OTEwNTc1NjB9.Nyy5b1v5TkeckiK8KrVpJ9RovS-tlw8kIpiO8NeQQnU
+
+
+### =========================================
+### SALUD DE LA API
+### =========================================
+
+### 15. HEALTH CHECK
+GET http://localhost:3000/salud
+
+### 16. ESTADÍSTICAS ADMIN - USUARIO NORMAL ❌
+GET http://localhost:3000/admin/estadisticas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJhZG1pbiIsImlhdCI6MTc5MTA1MTEyNywiZXhwIjoxNzkxMDU4MzI3fQ.PxnNF72W4nf0aNLJfZ59ImTFhV1OuRQKoRE7TluWErQ
+
+### 17. ESTADÍSTICAS ADMIN - SIN TOKEN ❌
+GET http://localhost:3000/admin/estadisticas
+
+### 18. ESTADISTICAS ADMIN - ADMIN ✅
+GET http://localhost:3000/admin/estadisticas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJyb2wiOiJhZG1pbiIsImlhdCI6MTc5MTA1MTEyNywiZXhwIjoxNzkxMDU4MzI3fQ.PxnNF72W4nf0aNLJfZ59ImTFhV1OuRQKoRE7TluWErQ
