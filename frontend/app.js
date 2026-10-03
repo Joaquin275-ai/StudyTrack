@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = "https://studytrack-1-ty3i.onrender.com";
 
 const loginSection = document.getElementById("login-section");
 const registerSection = document.getElementById("register-section");
